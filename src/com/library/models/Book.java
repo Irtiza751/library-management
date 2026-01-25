@@ -1,27 +1,28 @@
 package com.library.models;
 
-public class Book {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Book implements Serializable {
     private long id;
-    private int pages;
     private String title;
-    private String author;
+    private String description;
 
-    private Book() {
-        id = System.currentTimeMillis();
+    public Book() {
     }
 
-    public Book(int pages, String title, String author) {
-        this.pages = pages;
+    public Book(long id, String title, String description) {
+        this.id = id;
         this.title = title;
-        this.author = author;
+        this.description = description;
     }
 
-    public int getPages() {
-        return pages;
+    public long getId() {
+        return id;
     }
 
-    public void setPages(int pages) {
-        this.pages = pages;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -32,11 +33,32 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id && Objects.equals(title, book.title) && Objects.equals(description, book.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
